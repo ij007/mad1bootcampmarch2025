@@ -8,7 +8,7 @@ app = Flask(__name__)
 def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/ij007/Developer/Bootcamp_march/bloglite.db'
     db.init_app(app)
-    # create_all(app)
+    create_all(app)
     return app
 
 app = create_app()
