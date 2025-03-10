@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile</title>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change the link color to #111 (black) on hover */
+        li a:hover {
+            background-color: #111;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a href="/dashboard/{{user.username}}">Home</a></li>
+        <li><a href="/create_post/{{user.username}}">Create Post</a></li>
+        <li><a href="/profile/{{user.username}}">Profile</a></li>
+        <li><a href="/login">Logout</a></li>
+    </ul>
+    <h1>Profile</h1>
+    <h2>Welcome {{user.username}}</h2>
+    <a href="/followers/{{user.username}}">Followers</a>
+    <br>
+    <a href="/following/{{user.username}}">Following</a>
+    <br>
+    <a href="/all_posts/{{user.username}}">All Posts</a>
+</body>
+</html>

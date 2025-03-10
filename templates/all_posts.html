@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>All Posts</title>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change the link color to #111 (black) on hover */
+        li a:hover {
+            background-color: #111;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a href="/dashboard/{{user.username}}">Home</a></li>
+        <li><a href="/create_post/{{user.username}}">Create Post</a></li>
+        <li><a href="/profile/{{user.username}}">Profile</a></li>
+        <li><a href="/login">Logout</a></li>
+    </ul>
+    <h1>All Posts</h1>
+    {% if posts %}
+        {% for post in posts %}
+            <h2>{{post.title}}</h2>
+            <p>{{post.description}}</p>
+            {% if post.image_url %}
+                <img src="{{post.image_url}}" style="width: 200px; height: 200px;">
+                <br>
+            {% endif %}
+            <a href="/update_post/{{post.postID}}">Edit</a>
+            <a href="/delete_post/{{post.postID}}">Delete</a>
+        {% endfor %}
+    {% else %}
+        <p>No posts found</p>
+    {% endif %}
+</body>
+</html>
