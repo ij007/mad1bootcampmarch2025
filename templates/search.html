@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Dashboard</title>
+    <title>Search Results</title>
     <style>
-        ul {
+        .navbar {
             list-style-type: none;
             margin: 0;
             padding: 0;
@@ -14,11 +14,11 @@
             background-color: #333;
         }
 
-        li {
+        .navbar li {
             float: left;
         }
 
-        li a {
+        .navbar li a {
             display: block;
             color: white;
             text-align: center;
@@ -27,13 +27,13 @@
         }
 
         /* Change the link color to #111 (black) on hover */
-        li a:hover {
+        .navbar li a:hover {
             background-color: #111;
         }
     </style>
 </head>
 <body>
-    <ul>
+    <ul class="navbar">
         <li><a href="/dashboard/{{user.username}}">Home</a></li>
         <li><a href="/create_post/{{user.username}}">Create Post</a></li>
         <li><a href="/profile/{{user.username}}">Profile</a></li>
@@ -48,6 +48,23 @@
     {% if error %}
         <p>{{error}}</p>
     {% endif %}
-    <h1>Dashboard</h1>
+    <h1>Search Results</h1>
+    {% if users %}
+        <ul>
+            {% for each_user in users %}
+
+                {% if each_user.username != user.username %}
+                    <li>{{each_user.username}}</li>
+
+                    {% if each_user.username in followers_list %}
+                        <a href="/unfollow/{{user.username}}/{{each_user.username}}">Unfollow</a>
+                    {% else %}
+                        <a href="/follow/{{user.username}}/{{each_user.username}}">Follow</a>
+                    {% endif %}
+                    
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endif %}
 </body>
 </html>

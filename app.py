@@ -17,7 +17,7 @@ app = create_app()
 api = Api(app)
 
 api.add_resource(userAPI, '/user/<string:username>', '/user')
-api.add_resource(postAPI, '/post/<int:userID>', '/post')
+api.add_resource(postAPI, '/post/<int:userID>', '/post', '/post/update/<int:postID>', '/post/delete_post/<int:postID>')
 
 if __name__ == '__main__':
     from application.controllers import *

@@ -73,9 +73,29 @@ class postAPI(Resource):
             print(e)
             return {"error": str(e)}, 500
         
-    def put(self):
-        pass
+    def put(self, postID):
+        data = request.get_json()
+        try:
+            post = Post.query.filter_by(postID=postID).first()
+            if post:
+                post.title = data["title"]
+                post.description = data["description"]
+                post.image_url = data["image"]
+                db.session.commit()
+                return {"message": "Post updated successfully"}, 200
+            else:
+                return {"error": "Post not found"}, 404
+        except Exception as e:
+            print(e)
+            return {"error": str(e)}, 500
     
-    def delete(self):
-        pass
+    def delete(self, postID):
+        try:
+            post = Post.query.filter_by(postID=postID).first()
+            db.session.delete(post)
+            db.session.commit()
+            return {"message": "Post deleted successfully"}, 200
+        except Exception as e:
+            print(e)
+            return {"error": str(e)}, 500
     
